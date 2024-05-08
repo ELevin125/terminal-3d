@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Terminal_3D.Rendering
@@ -59,8 +58,6 @@ namespace Terminal_3D.Rendering
         {
             if (x < consoleWidthChars && y < consoleHeightChars)
             {
-                Debug.WriteLine(x);
-                Debug.WriteLine(y);
                 Console.SetCursorPosition(x, y);
                 Console.Write(c);
             }

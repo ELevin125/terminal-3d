@@ -1,4 +1,4 @@
-﻿using Terminal_3D.Rendering;
+﻿using Terminal_3D.Core;
 
 class Program
 {
@@ -9,6 +9,6 @@ class Program
         const float AVERAGE_CHAR_WIDTH = 9.45f;
         const float AVERAGE_CHAR_HEIGHT = 21f;
 
-        Renderer renderer = new Renderer(MAX_CONSOLE_WIDTH_CHARS, MAX_CONSOLE_HEIGHT_CHARS, AVERAGE_CHAR_WIDTH, AVERAGE_CHAR_HEIGHT);
+        Engine engine = new Engine(MAX_CONSOLE_WIDTH_CHARS, MAX_CONSOLE_HEIGHT_CHARS, AVERAGE_CHAR_WIDTH, AVERAGE_CHAR_HEIGHT);
     }
 }
