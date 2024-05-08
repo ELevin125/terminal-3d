@@ -13,19 +13,38 @@
             Z = z;
         }
 
-        public Vector3 Add(Vector3 other)
+        public static Vector3 operator +(Vector3 a, Vector3 b)
         {
-            return new Vector3(X + other.X, Y + other.Y, Z + other.Z);
+            return new Vector3(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
         }
 
-        public Vector3 Subtract(Vector3 other)
+        public static Vector3 operator -(Vector3 a, Vector3 b)
         {
-            return new Vector3(X - other.X, Y - other.Y, Z - other.Z);
+            return new Vector3(a.X - b.X, a.Y - b.Y, a.Z - b.Z);
         }
 
-        public Vector3 Multiply(float scalar)
+        public static Vector3 operator *(Vector3 vector, float scalar)
         {
-            return new Vector3(X * scalar, Y * scalar, Z * scalar);
+            return new Vector3(vector.X * scalar, vector.Y * scalar, vector.Z * scalar);
+        }
+
+        public static Vector3 operator *(float scalar, Vector3 vector)
+        {
+            return vector * scalar;
+        }
+
+        public static float Dot(Vector3 a, Vector3 b)
+        {
+            return a.X * b.X + a.Y * b.Y + a.Z * b.Z;
+        }
+
+        public static Vector3 Cross(Vector3 a, Vector3 b)
+        {
+            return new Vector3(
+                a.Y * b.Z - a.Z * b.Y,
+                a.Z * b.X - a.X * b.Z,
+                a.X * b.Y - a.Y * b.X
+            );
         }
 
         public float Magnitude()
