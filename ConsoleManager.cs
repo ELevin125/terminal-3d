@@ -14,22 +14,21 @@ namespace Terminal_3D.Rendering
         }
 
         // Define constants for the maximum width and height of the console window in characters
-        private int consoleWidthChars;
-        private int consoleHeightChars;
-        private float averageCharWidth;
-        private float averageCharHeight;
+        public readonly int MaxWidthChars;
+        public readonly int MaxHeightChars;
+        private readonly float AverageCharWidth;
+        private readonly float AverageCharHeight;
 
         public ConsoleManager(int width, int height, float charWidth, float charHeight)
         {
-            consoleWidthChars = width;
-            consoleHeightChars = height;
-            averageCharWidth = charWidth;
-            averageCharHeight = charHeight;
+            MaxWidthChars = width;
+            MaxHeightChars = height;
+            AverageCharWidth = charWidth;
+            AverageCharHeight = charHeight;
         }
 
         public void ConfigureDisplay()
         {
-            // Import the necessary functions from user32.dll
             [DllImport("user32.dll")]
             static extern IntPtr GetForegroundWindow();
             [DllImport("user32.dll")]
@@ -45,18 +44,17 @@ namespace Terminal_3D.Rendering
             MoveWindow( consoleWindowHandle, 
                         screenRect.Left / 2,
                         screenRect.Top / 2,
-                        (int)(consoleWidthChars * averageCharWidth),
-                        (int)(consoleHeightChars * averageCharHeight),
+                        (int)(MaxWidthChars * AverageCharWidth),
+                        (int)(MaxHeightChars * AverageCharHeight),
                         true);
 
             Console.SetCursorPosition(0, 0);
 
-            //Console.SetBufferSize((int)(consoleWidthChars * averageCharWidth), (int)(consoleHeightChars * averageCharHeight));
         }
 
         public void DrawCharacter(int x, int y, char c)
         {
-            if (x < consoleWidthChars && y < consoleHeightChars)
+            if (x < MaxWidthChars && y < MaxHeightChars)
             {
                 Console.SetCursorPosition(x, y);
                 Console.Write(c);
@@ -64,21 +62,6 @@ namespace Terminal_3D.Rendering
             else
             {
                 throw new ArgumentOutOfRangeException(nameof(x), $"Target coordinates ({x}, {y}) are out of the console bounds.");
-            }
-        }
-
-        public void DrawBorder(char c)
-        {
-            for (int y = 0; y <= consoleHeightChars - 1; y++)
-            {
-                DrawCharacter(0, y, c);
-                DrawCharacter(consoleWidthChars - 1, y, c);
-            }
-
-            for (int x = 0; x < consoleWidthChars; x++)
-            {
-                DrawCharacter(x, 0, c);
-                DrawCharacter(x, consoleHeightChars - 1, c);
             }
         }
     }
