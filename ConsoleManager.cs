@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace ConsoleGame
+namespace Terminal_3D.Rendering
 {
     public class ConsoleManager
     {
