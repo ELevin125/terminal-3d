@@ -16,5 +16,10 @@ namespace Terminal_3D.Geometry
         {
             get { return new Vector2(0, 0); }
         }
+
+        public override string ToString()
+        {
+            return $"({X}, {Y})";
+        }
     }
 }
