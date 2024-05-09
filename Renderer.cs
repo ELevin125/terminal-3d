@@ -1,5 +1,6 @@
 ﻿using Terminal_3D.Geometry;
 using Terminal_3D.SceneManagement;
+using Terminal_3D.Core;
 
 namespace Terminal_3D.Rendering
 {

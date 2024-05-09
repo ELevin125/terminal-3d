@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace Terminal_3D.Rendering
+namespace Terminal_3D.Core
 {
     public class ConsoleManager
     {
