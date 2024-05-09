@@ -27,19 +27,14 @@ namespace Terminal_3D.Rendering
 
             DrawBorder('#');
 
-            //DrawLine2D(new Vector2(10, 10), new Vector2(20, 20));
-            //DrawLine2D(new Vector2(20, 20), new Vector2(30, 10));
-            //DrawLine2D(new Vector2(20, 20), new Vector2(20, 30));
+            foreach (Mesh m in WorkingScene.AllMeshes)
+            {
+                foreach (Edge e in m.Edges)
+                {
+                    DrawLine3D(m.Vertices[e.V1].Position, m.Vertices[e.V2].Position);
+                }
+            }
 
-            //DrawLine2D(new Vector2(40, 10), new Vector2(65, 10));
-            //DrawLine2D(new Vector2(65, 10), new Vector2(65, 30));
-            //DrawLine2D(new Vector2(65, 30), new Vector2(40, 30));
-            //DrawLine2D(new Vector2(40, 30), new Vector2(40, 10));
-
-            //DrawLine2D(new Vector2(-10, 32), new Vector2(180, 50));
-
-            //DrawLine3D(new Vector3(50, 0, 20000), new Vector3(1000, 200, 2000));
-            DrawCube(new Vector3(0f, 0f, 200f), new Vector3(20f, 10f, 100f));
             // Hold on last frame
             Console.ReadKey();
         }
@@ -132,45 +127,5 @@ namespace Terminal_3D.Rendering
 
             DrawLine2D(startScrenSpace, endScreenSpace, '#');
         }
-
-        private void DrawPlain(Vector3 position, Vector3 scale)
-        {
-            Vector3 bottomLeft = new Vector3(position.X, position.Y, position.Z);
-            Vector3 bottomRight = new Vector3(position.X + scale.X, position.Y, position.Z);
-            Vector3 topLeft = new Vector3(position.X, position.Y, position.Z + scale.Z);
-            Vector3 topRight = new Vector3(position.X + scale.X, position.Y, position.Z + scale.Z);
-
-
-
-            // Draw lines connecting the four corners to form the floor
-            DrawLine3D(bottomLeft, bottomRight);
-            DrawLine3D(bottomRight, topRight);
-            DrawLine3D(topRight, topLeft);
-            DrawLine3D(topLeft, bottomLeft);
-        }
-
-        private void DrawCube(Vector3 position, Vector3 scale)
-        {
-            // Draw the bottom face of the prism
-            DrawPlain(position, new Vector3(scale.X, 0, scale.X));
-
-            // Draw the top face of the prism
-            DrawPlain(new Vector3(position.X, position.Y + scale.Y, position.Z),
-                           new Vector3(scale.X, 0, scale.Z));
-
-            // Draw the four vertical edges of the prism
-            // Using this.drawPlain again would double draw horizontal edges
-            DrawLine3D(position,
-                            new Vector3(position.X, position.Y + scale.Y, position.Z));
-            DrawLine3D(new Vector3(position.X + scale.X, position.Y, position.Z),
-                            new Vector3(position.X + scale.X, position.Y + scale.Y, position.Z));
-            DrawLine3D(new Vector3(position.X + scale.X, position.Y, position.Z + scale.Z),
-                            new Vector3(position.X + scale.X, position.Y + scale.Y, position.Z + scale.Z));
-            DrawLine3D(new Vector3(position.X, position.Y, position.Z + scale.Z),
-                            new Vector3(position.X, position.Y + scale.Y, position.Z + scale.Z));
-        }
-
-
-
     }
 }
