@@ -10,6 +10,8 @@ namespace Terminal_3D.Rendering
         private float MoveSpeed = 20f;
         private float RotateSpeed = 0.005f;
 
+        public int screenDistance = 70;
+
         public Camera(Vector3 position, Vector3 rotation) : base(position, rotation)
         {
             InputManager.Instance.KeyPressed += OnKeyPressed;

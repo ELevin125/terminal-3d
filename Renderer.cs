@@ -104,10 +104,8 @@ namespace Terminal_3D.Rendering
             // Behind camera, don't draw
             if (translated.Z < 0) return null;
 
-            int screenDistance = 400;
-
-            return new Vector2((int)((translated.X / translated.Z) * screenDistance + screenCenter.X),
-                               (int)((delta.Y / translated.Z) * screenDistance + screenCenter.Y));
+            return new Vector2((int)((translated.X / translated.Z) * MainCamera.screenDistance + screenCenter.X),
+                               (int)((delta.Y / translated.Z) * MainCamera.screenDistance + screenCenter.Y));
         }
 
         public void DrawLine3D(Vector3 start, Vector3 end)
