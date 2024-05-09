@@ -1,4 +1,5 @@
-﻿using Terminal_3D.Geometry;
+﻿using System;
+using Terminal_3D.Geometry;
 
 namespace Terminal_3D.SceneManagement
 {
@@ -6,6 +7,14 @@ namespace Terminal_3D.SceneManagement
     {
         public Vector3 Position { get; set; }
         public Vector3 Rotation { get; set; }
+        public Vector3 Forward
+        {
+            get
+            {
+                // Calculate the forward vector based on the rotation angles
+                return new Vector3((float)Math.Sin(Rotation.Y), 0, (float)Math.Cos(Rotation.Y));
+            }
+        }
 
         public Entity(Vector3 position, Vector3 rotation)
         {
