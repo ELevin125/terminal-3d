@@ -5,13 +5,22 @@ namespace Terminal_3D.Core
 {
     public class Engine
     {
-        private Scene CurrentScene;
-        private Renderer Renderer;
+        private readonly Scene CurrentScene;
+        private readonly Renderer Renderer;
         public Engine(int width, int height, float charWidth, float charHeight)
         {
             CurrentScene = new Scene();
             Renderer = new Renderer(width, height, charWidth, charHeight, CurrentScene);
+
+            
+        }
+
+        public void Update()
+        {
+            InputManager.Instance.Listen();
             Renderer.RenderFrame();
+
+            Thread.Sleep(1000 / 100);
         }
     }
 }

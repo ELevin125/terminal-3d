@@ -10,5 +10,10 @@ class Program
         const float AVERAGE_CHAR_HEIGHT = 21f;
 
         Engine engine = new Engine(MAX_CONSOLE_WIDTH_CHARS, MAX_CONSOLE_HEIGHT_CHARS, AVERAGE_CHAR_WIDTH, AVERAGE_CHAR_HEIGHT);
+
+        while (true)
+        {
+            engine.Update();
+        }
     }
 }

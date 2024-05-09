@@ -1,8 +1,6 @@
 ﻿using Terminal_3D.Geometry;
 using Terminal_3D.SceneManagement;
 using Terminal_3D.Core;
-using System.Diagnostics;
-using static System.Formats.Asn1.AsnWriter;
 
 namespace Terminal_3D.Rendering
 {
@@ -23,6 +21,7 @@ namespace Terminal_3D.Rendering
 
         public void RenderFrame()
         {
+            Console.Clear();
             Console.SetCursorPosition(0, 0);
 
             DrawBorder('#');
@@ -35,8 +34,6 @@ namespace Terminal_3D.Rendering
                 }
             }
 
-            // Hold on last frame
-            Console.ReadKey();
         }
 
         private void DrawBorder(char c)
@@ -115,12 +112,8 @@ namespace Terminal_3D.Rendering
 
         public void DrawLine3D(Vector3 start, Vector3 end)
         {
-            Debug.WriteLine("---");
-            Debug.WriteLine(start.ToString() + " " + end.ToString());
-
             Vector2 startScrenSpace = ToScreenSpace(start);
             Vector2 endScreenSpace = ToScreenSpace(end);
-            Debug.WriteLine(startScrenSpace.ToString() + " " + endScreenSpace.ToString());
 
             if (startScrenSpace == null || endScreenSpace == null)
                 return;
