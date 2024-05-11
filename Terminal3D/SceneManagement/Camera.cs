@@ -1,14 +1,13 @@
 ﻿using Terminal_3D.SceneManagement;
 using Terminal_3D.Geometry;
 using Terminal_3D.Core;
-using System.Diagnostics;
 
 namespace Terminal_3D.Rendering
 {
     public class Camera : Entity
     {
         private float MoveSpeed = 20f;
-        private float RotateSpeed = 0.005f;
+        private float RotateSpeed = 0.01f;
 
         public int screenDistance = 70;
 

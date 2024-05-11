@@ -1,5 +1,4 @@
-﻿using System;
-using Terminal_3D.Geometry;
+﻿using Terminal_3D.Geometry;
 
 namespace Terminal_3D.SceneManagement
 {
