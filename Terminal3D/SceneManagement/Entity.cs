@@ -4,8 +4,8 @@ namespace Terminal_3D.SceneManagement
 {
     public class Entity
     {
-        public Vector3 Position { get; set; }
-        public Vector3 Rotation { get; set; }
+        public Vector3 Position { get; private set; }
+        public Vector3 Rotation { get; private set; }
         public Vector3 Forward
         {
             get

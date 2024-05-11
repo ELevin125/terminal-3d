@@ -21,19 +21,20 @@ namespace Terminal_3D.Rendering
             switch (key)
             {
                 case ConsoleKey.W:
-                    Position += Forward * MoveSpeed;
+                    Move(Forward * MoveSpeed);
                     break;
                 case ConsoleKey.A:
-                    Rotation.Y -= RotateSpeed;
+                    Rotate(new Vector3(0, -RotateSpeed, 0));
                     break;
                 case ConsoleKey.S:
-                    Position += Forward * -MoveSpeed;
+                    Move(Forward * -MoveSpeed);
                     break;
                 case ConsoleKey.D:
-                    Rotation.Y += RotateSpeed;
+                    Rotate(new Vector3(0, RotateSpeed, 0));
                     break;
                 default:
                     break;
+
             }
 
         }
