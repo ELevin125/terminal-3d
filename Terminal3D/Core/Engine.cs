@@ -9,10 +9,8 @@ namespace Terminal_3D.Core
         private readonly Renderer Renderer;
         public Engine(int width, int height, float charWidth, float charHeight)
         {
-            CurrentScene = new Scene();
+            CurrentScene = new MainScene();
             Renderer = new Renderer(width, height, charWidth, charHeight, CurrentScene);
-
-            
         }
 
         public void Update()
