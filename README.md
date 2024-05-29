@@ -1,6 +1,7 @@
 # Terminal 3D
 <p align="middle">
-  <img src="https://github.com/ELevin125/terminal-3d/assets/123626350/1f4f5e80-35a2-4b14-9fc5-7c5798444166" style="width:600px;">
+
+  <img src="https://github.com/ELevin125/terminal-3d/assets/123626350/462bd8a9-1776-41c5-96b4-7b2b3f6039ae" style="width:600px;">
 </p>
 This project is a simple wireframe engine that will run in the terminal. The code utilizes a simple wireframe engine to render the environment in a 3D space, before converting and drawing the output into the terminal with ASCII characters.
 
