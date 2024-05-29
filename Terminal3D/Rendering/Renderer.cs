@@ -1,6 +1,7 @@
 ﻿using Terminal_3D.Geometry;
 using Terminal_3D.SceneManagement;
 using Terminal_3D.Core;
+using System.Diagnostics;
 
 namespace Terminal_3D.Rendering
 {
@@ -51,7 +52,7 @@ namespace Terminal_3D.Rendering
             }
         }
 
-        private void DrawLine2D(Vector2 start, Vector2 end, char c = '#')
+        private void DrawLine2D(Vector2 start, Vector2 end, float distanceToStart = 0, float distanceToEnd = 0)
         {
             int dx = (int)Math.Abs(end.X - start.X);
             int dy = (int)Math.Abs(end.Y - start.Y);
@@ -64,11 +65,26 @@ namespace Terminal_3D.Rendering
             int endX = (int)end.X;
             int endY = (int)end.Y;
 
-            // TODO: implement a propper clipping algorithm, instead of just not drawing them
+            // Calculate distance along the line
+            float totalDistance = Vector2.Distance(start, end);
+            float distanceToX = Vector2.Distance(start, new Vector2(x, y));
 
+
+            // TODO: implement a propper clipping algorithm, instead of just not drawing them
+            char c = ' ';
             // Continue with drawing as long as the end hasn't been reached
             while (x != endX || y != endY)
             {
+                // Calculate the normalized distance to the current point
+                distanceToX = Vector2.Distance(start, new Vector2(x, y));
+                float distanceToCurrentNormalized = distanceToX / MathF.Max(totalDistance, 1);
+
+                // Calculate what the distance to the camera would be at a certain point on the 2D line
+                float normalizedValue = distanceToStart + (distanceToEnd - distanceToStart) * distanceToCurrentNormalized;
+
+                c = GetGradientValue(normalizedValue);
+
+
                 if (x >= 0 && y >= 0 && x <= CM.MaxWidthChars - 1 && y <= CM.MaxHeightChars - 1)
                     CM.DrawCharacter(x, y, c);
 
@@ -85,9 +101,30 @@ namespace Terminal_3D.Rendering
                 }
             }
 
-            // Ensure the last point is drawn if it's on-screen
-            if (x >= 0 && y >= 0 && x <= CM.MaxWidthChars - 1 && y <= CM.MaxHeightChars - 1)
-                CM.DrawCharacter(x, y, c);
+            // //Ensure the last point is drawn if it's on-screen
+            //if (x >= 0 && y >= 0 && x <= CM.MaxWidthChars - 1 && y <= CM.MaxHeightChars - 1)
+            //    CM.DrawCharacter(x, y, c);
+        }
+
+        private char GetGradientValue(float distanceToCamera = 0, float nearestDistance = 200, float farthestDistance = 2000)
+        {
+            string gradient = "@%#*+=-:. ";
+            int gradientIndex = 0;
+
+
+            // Map the distance to the index in the gradient
+            if (distanceToCamera <= nearestDistance)
+                gradientIndex = 0;
+            else if (distanceToCamera >= farthestDistance)
+                gradientIndex = gradient.Length - 1;
+            else
+            {
+                // Interpolate the gradient index between 0 and gradient.Length - 1
+                float normalizedDistance = (distanceToCamera - nearestDistance) / MathF.Max(farthestDistance - nearestDistance, 1);
+                gradientIndex = (int)MathF.Floor(normalizedDistance * (gradient.Length - 1));
+            }
+
+            return gradient[gradientIndex];
         }
 
         private Vector2 ToScreenSpace(Vector3 worldPos)
@@ -116,7 +153,10 @@ namespace Terminal_3D.Rendering
             if (startScrenSpace == null || endScreenSpace == null)
                 return;
 
-            DrawLine2D(startScrenSpace, endScreenSpace, '#');
+            float startDist = Vector3.Distance(MainCamera.Position, start);
+            float endDist = Vector3.Distance(MainCamera.Position, end);
+
+            DrawLine2D(startScrenSpace, endScreenSpace, startDist, endDist);
         }
     }
 }

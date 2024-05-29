@@ -69,5 +69,10 @@
         {
             return $"({X}, {Y}, {Z})";
         }
+
+        public static float Distance(Vector3 a, Vector3 b)
+        {
+            return (a - b).Magnitude();
+        }
     }
 }
